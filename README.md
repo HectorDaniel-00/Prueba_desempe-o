@@ -26,6 +26,24 @@ The system enables:
 - **pg-format**
 
 
+## 📂 Database Normalization
+The original Excel file was analyzed and manually normalized following the **First Three Normal Forms (1NF, 2NF, 3NF)**:
+1. **1NF** – Removed repeating groups and ensured atomic values.
+2. **2NF** – Eliminated partial dependencies by creating separate tables for entities such as **Customers**, **Invoices**, **Transactions**, **Transaction Types**, **Transaction Status**, and **Platforms**.
+3. **3NF** – Removed transitive dependencies, keeping only attributes directly related to the primary key in each table.
+
+The final **relational model** ensures data integrity, avoids redundancy, and supports efficient queries
+
+
+## 💾 Database Creation (DDL)
+The database is created with the script `database.sql` located in the `/docs` folder.  
+Run the following command to create the database:
+
+```bash
+psql -u postgres -d pd_hector_vargas_manglar -f database.sql
+```
+
+
 ## 🧩 Project Structure
 - `controllers` - API with CRUD and advanced queries.
 - `config` - `.sql` script to initialize the database.
@@ -34,6 +52,7 @@ The system enables:
 - `routes` 
 - `seed`
 - `app.js`
+
 
 ## 🛢️ How to Run the Project
 
@@ -45,16 +64,77 @@ The system enables:
 5. Run the bulk load script manually.
 6. Start server: `node app.js`.
 
-## 🔍 Advanced Queries
 
-Available endpoints in Postman:
+---
 
-1. **Total paid by each client**
-2. **Pending invoices with client and transaction info**
-3. **Transactions filtered by platform (Nequi or Daviplata)**
+## 📌 How to Run the Project
+1. Clone the repository:
+```bash
+git clone https://github.com/HectorDaniel-00/Prueba_desempe-o
+```
+2. Install dependencies:
+```bash 
+npm install
+npm i cors express csv-parser pg pg-format 
+```
+3. Import the database:
+```bash
+psql -u postgres -d pd_hector_vargas_manglar -f database.sql
+```
+4. Start the server:
+```bash
+npm app.js
+```
+6. Test endpoints using Postman with the provided collection.
+
+---
+
+
+## 🖥 CRUD API
+The **CRUD** was implemented for the `transiction` entity. 
+
+### Endpoints
+| Method | Endpoint                                 | Description               |
+|--------|------------------------------------------|---------------------------|
+| GET    |  `/api/v1/transaction/get`               | Get all transactions      |
+| GET    |  `/api/v1/transaction:id`                | Get a tramsactions by ID  |
+| POST   |  `/api/v1/transaction/create`            | Create a new transaction  |
+| PUT    |  `/api/v1/transaction/update/:id`        | Update transaction info   |
+| DELETE |  `/api/v1/transaction/delete/:id`        | Delete a transaction      |
+
+
+## 📂 Project Structure
+```
+├── app.js
+├── config
+│   └── db.js
+├── controllers
+│   └── consulta.controller.js
+├── data
+│   ├── client.csv
+│   ├── invoices.csv
+│   ├── platform.csv
+│   ├── statuses.csv
+│   └── transactions.csv
+├── docs
+│   ├── database.sql
+│   └── modelo-relacional.drawio (1) copy.png
+├── package.json
+├── package-lock.json
+├── README.md
+├── routes
+│   └── route.js
+└── seed
+    ├── seed_clients.js
+    ├── seed_invoices.js
+    ├── seed_platform.js
+    ├── seed_status.js
+    └── seed_transactions.js
+```
+---
+
 
 ## 👤 Developer
 
 - **Name**: Hector Vargas
 - **Clan**: Manglar
-
