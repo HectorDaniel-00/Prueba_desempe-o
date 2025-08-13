@@ -62,3 +62,4 @@ CREATE TABLE transactions(
 		FOREIGN KEY (invoice_number) REFERENCES invoices(invoice_number) ON DELETE SET NULL ON UPDATE CASCADE,
 		FOREIGN KEY (id_statu) REFERENCES statuses(id_statu) ON DELETE SET NULL ON UPDATE CASCADE
 		);
+

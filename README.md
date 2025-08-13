@@ -57,3 +57,4 @@ Available endpoints in Postman:
 
 - **Name**: Hector Vargas
 - **Clan**: Manglar
+
