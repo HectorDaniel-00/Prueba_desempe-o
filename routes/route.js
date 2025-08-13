@@ -1,18 +1,14 @@
 import { Router } from "express";
-import { getLoans, getLoanId, postLoands, updateLoandsID } from "../controllers/consulta_pg.controller.js";
+import { deleteTransactionID, getTransaction, getTransactionId, postTransaction, updateTransactionID, } from "../controllers/consulta.controller.js";
 
 const router = Router();
 
-// Colocar cada una de las rutas a usar
+router.get('/transaction', getTransaction);
 
-router.get('/transaction', getLoans);
+router.get('/transaction/:isbn', getTransactionId);
 
-router.get('/transaction/:isbn', getLoanId);
+router.post('/transaction/createe', postTransaction);
 
+router.put('/transaction/update/:id_transaction', updateTransactionID);
 
-
-router.post('/createuser', postLoands);
-
-router.put('/prestamos/:id', updateLoandsID);
-
-router.delete('/transaction/:id')
+router.delete('/transaction/delete/:id_transaction', deleteTransactionID);

@@ -7,30 +7,33 @@ import { platform } from 'os';
 
 
 
-export async function seed_platform() {
-    const routeFile = path.resolve('data/platform.csv');
-    const platform = []; 
+export async function seed_invoice() {
+    const routeFile = path.resolve('data/invoices.csv');
+    const invoices = []; 
 
     return new Promise((resolve, reject) => {
         fs.createReadStream(routeFile)
             .pipe(csv())
             .on("data", (row) => {
-                platform.push([
-                    row.name_platform
+                invoices.push([
+                    row.invoice_number,
+                    row.invoice_period,
+                    row.invoice_amount,
+                    row.amount_paid
                 ]);
                 
             })
             .on('end', async () => {
                 try {
-                    if(platform.length === 0) {
+                    if(invoices.length === 0) {
                         console.log('The csv file is empty or has no data');
                         resolve();
                         return;
                     }
                     
-                    const sql = format("INSERT INTO platform(name_platform) VALUES %L", platform);
+                    const sql = format("INSERT INTO invoices(invoice_number, invoice_period, invoice_amount, amount_paid) VALUES %L", invoices);
                     const result = await pool.query(sql);
-                    console.log(`✅ They were inserted ${result.rowCount} platform.`);
+                    console.log(`✅ They were inserted ${result.rowCount} invoices.`);
                     resolve();
                 } catch (err) {
                     console.error('❌ Error inserting statuses:', err.message);
@@ -38,12 +41,11 @@ export async function seed_platform() {
                 }
             })
             .on('error', (err) => {
-                console.error('❌ Error reading CSV file from books:', err.message);
+                console.error('❌ Error reading CSV file from invoices:', err.message);
                 reject(err);
             });
     });
 }
 
 
-
-seed_platform()
+seed_invoice()

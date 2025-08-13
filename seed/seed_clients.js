@@ -17,7 +17,7 @@ export async function seed_client() {
             .on("data", (row) => {
                 clients.push([
                     row.full_name,
-                    row.indetification,
+                    row.identification,
                     row.direction,
                     row.phone,
                     row.email,
@@ -32,7 +32,7 @@ export async function seed_client() {
                         return;
                     }
                     
-                    const sql = format("INSERT INTO client(full_name, indetification, direction, phone, email, id_platform) VALUES %L", clients);
+                    const sql = format("INSERT INTO clients(full_name, identification, direction, phone, email, id_platform) VALUES %L", clients);
                     const result = await pool.query(sql);
                     console.log(`✅ They were inserted ${result.rowCount} clients.`);
                     resolve();
