@@ -25,7 +25,7 @@ CREATE TABLE statuses(
 DROP TABLE IF EXISTS invoices;
 CREATE TABLE invoices(
 		invoice_number VARCHAR(250) PRIMARY KEY,
-		invoice_period DATE NOT NULL,
+		invoice_period VARCHAR(30) NOT NULL,
 		invoice_amount DECIMAL(10, 2) NOT NULL,
 		amount_paid DECIMAL(10, 2) NOT NULL,
 		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

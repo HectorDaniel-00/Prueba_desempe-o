@@ -5,11 +5,12 @@ const router = Router();
 
 router.get('/transaction', getTransaction);
 
-router.get('/transaction/:isbn', getTransactionId);
+router.get('/transaction/:id_transaction', getTransactionId);
 
-router.post('/transaction/createe', postTransaction);
+router.post('/transaction/create', postTransaction);
 
 router.put('/transaction/update/:id_transaction', updateTransactionID);
 
 router.delete('/transaction/delete/:id_transaction', deleteTransactionID);
 
+export default router;
